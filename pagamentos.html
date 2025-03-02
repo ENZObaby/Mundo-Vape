@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #E0FFFF; /* Ciano claro */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            animation: fadeIn 1s ease-out;
+        }
+
+        h2 {
+            color: #007B8F;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: #007B8F;
+            margin-top: 30px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .form-container {
+            margin-bottom: 20px;
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-container input, .form-container select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            transition: 0.3s ease-in-out;
+        }
+
+        .form-container input:focus, .form-container select:focus {
+            border-color: #007B8F;
+            box-shadow: 0 0 10px rgba(0, 123, 143, 0.3);
+        }
+
+        .pix-code {
+            font-size: 18px;
+            font-weight: bold;
+            background: #007B8F;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 10px 0;
+            box-shadow: 0 4px 6px rgba(0, 123, 143, 0.2);
+        }
+
+        .btn, .buy-btn {
+            background-color: #007B8F;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .order-item {
+            margin-bottom: 10px;
+        }
+        .order-item strong {
+            color: #333;
+        }
+        .order-item span {
+            color: #777;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            background-color: #007bff;
+            text-align: center;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .btn:hover, .buy-btn:hover {
+            background-color: #005F6B;
+            transform: scale(1.05);
+        }
+
+        .buy-btn {
+            margin-top: 20px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        #order-details {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Formulário de Checkout -->
+        <h2>Detalhes do Pedido</h2>
+        <div class="form-container">
+            <form id="checkout-form">
+                <label for="endereco">Endereço + número</label>
+                <input type="text" id="endereco" name="endereco" required>
+        
+                <label for="cep">CEP</label>
+                <input type="text" id="cep" name="cep" required>
+        
+                <label for="cidade">Cidade</label>
+                <input type="text" id="cidade" name="cidade" required>
+        
+                <label for="estado">Estado</label>
+                <select id="estado" name="estado" required>
+                    <option value="">Selecione o estado</option>
+                    <option value="DF">Distrito Federal</option>
+                    <option value="AC">Acre</option>
+                    <option value="AL">Alagoas</option>
+                    <option value="AM">Amazonas</option>
+                    <option value="BA">Bahia</option>
+                    <option value="CE">Ceará</option>
+                    <option value="ES">Espírito Santo</option>
+                    <option value="GO">Goiás</option>
+                    <option value="MA">Maranhão</option>
+                    <option value="MT">Mato Grosso</option>
+                    <option value="MS">Mato Grosso do Sul</option>
+                    <option value="MG">Minas Gerais</option>
+                    <option value="PA">Pará</option>
+                    <option value="PB">Paraíba</option>
+                    <option value="PR">Paraná</option>
+                    <option value="PE">Pernambuco</option>
+                    <option value="PI">Piauí</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="RN">Rio Grande do Norte</option>
+                    <option value="RS">Rio Grande do Sul</option>
+                    <option value="RO">Rondônia</option>
+                    <option value="RR">Roraima</option>
+                    <option value="SC">Santa Catarina</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="SE">Sergipe</option>
+                    <option value="TO">Tocantins</option>
+                </select>
+        
+                <button type="submit" class="buy-btn">✅informações salvas automaticamente!</button>
+            </form>
+            <br>
+            <div id="mensagem" class="hidden">A TAXA DE ENVIO É: 15,00 R$</div>
+            <div id="barra-pagamento" class="hidden">
+        </div>
+
+        <!-- PIX -->
+        <div class="pix">
+            <h3>Pagamento via PIX</h3>
+            <p>Para finalizar sua compra, faça o pagamento via PIX para o seguinte código:</p>
+            <p class="pix-code">(13)98151-2007</p>
+            <p>Após o pagamento, o produto será separado e entregue ao destinatário 😉</p>
+            <br>
+            <button class="btn" onclick="window.location.href='index.html'">Voltar</button>
+        </div>
+        <script src="script.js"></script>
+    </div>
+
+    <script>
+        // Pegar as informações do localStorage
+        const selectedProduct = localStorage.getItem('selectedProduct');
+        const selectedFlavor = localStorage.getItem('selectedFlavor');
+        const productPrice = localStorage.getItem('productPrice');
+
+        // Exibir as informações do pedido
+        const orderDetails = document.getElementById('order-details');
+        if (selectedProduct && selectedFlavor && productPrice) {
+            orderDetails.innerHTML = `
+                <p><strong>Produto Selecionado:</strong> ${selectedProduct}</p>
+                <p><strong>Sabor Selecionado:</strong> ${selectedFlavor}</p>
+                <p><strong>Preço:</strong> R$ ${productPrice}</p>
+            `;
+        } else {
+            orderDetails.innerHTML = '<p>Nenhum produto selecionado.</p>';
+        }
+    </script>
+</body>
+
+
+</html>
